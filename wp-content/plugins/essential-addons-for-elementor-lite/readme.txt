@@ -2,9 +2,9 @@
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, manzurahammed
 Tags: elementor, elements, addons, elementor addons, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
 Requires at least: 5.0
-Tested up to: 5.7.1
+Tested up to: 5.7.2
 Requires PHP: 5.6
-Stable tag: 4.6.6
+Stable tag: 4.7.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -88,6 +88,7 @@ We have designed 43 of the most useful widgets to enhance your Elementor Page Bu
 41. [Login | Register Form](https://essential-addons.com/elementor/login-register-form/) - Create amazing and attractive login or registration forms in Elementor 
 42. [Woo Product Compare](https://essential-addons.com/elementor/woo-product-compare/) - Create stunning WooCommerce Product Compare table instantly
 43. [Woo Product Carousel](https://essential-addons.com/elementor/woo-product-carousel/) - Design amazing WooCommerce Product Carousel with ease
+44. [Simple Menu](https://essential-addons.com/elementor/simple-menu/)- Design beautiful Navigation menu for your WordPress site quite easily
 
 
 
@@ -223,6 +224,57 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+= 4.7.4 - 29/06/2021 =
+
+- Fixed: EA Filterable gallery | Image height not working for "Search and Filter" layout
+- Fixed: EA Login/Register Form | Backslash (\) not working in Login form
+- Fixed: EA Login/Register Form | Shortcode not working inside Header Content
+- Fixed: EA Woo Product Carousel | Cart button default color not changing
+- Fixed: EA Woo Product Carousel | Broken layout on Astra theme
+- Fixed: EA Product Grid | Button styles not working for "Out of Stock" products
+- Fixed: EA Sticky Video | PHP notice when Sticky option is not enabled 
+- Fixed: EA Countdown | Saved Template not working as per the condition
+- Fixed: EA Product Grid | Product Title color not changing on the Quick view Popup section
+- Fixed: EA Flip Box | Zoom out and Fade in effects not working
+- Fixed: EA Filterable Gallery | Videos not working for Card layout
+- Fixed: EA Post Grid | Typography colors not changing
+- Few minor bug fix and improvements
+
+= 4.7.3 - 21/06/2021 =
+
+- Improved: EA Simple Menu | Added more options for Hamburger menu
+- Fixed: Assets not loading properly for private pages
+- Fixed: EA Filterable Gallery | Removed blank space from Filterable controls
+- Few minor bug fix and improvements
+
+= 4.7.2 - 15/06/2021 =
+
+- Improved: WPML Compatibility
+- Fixed: EA Filterable Gallery | Hover overlay color not working in Card view
+- Few minor bug fix and improvements
+
+= 4.7.1 - 07/06/2021 =
+
+- Removed: Elementor  deprecation methods
+- Added: Compatibility with PHP 8.0
+- Added: EA Login/Register Form | Added permission check for security enhancement
+- Fixed: EA Gravity Form | Styles being applied to input fields
+- Fixed: EA Tooltip | Alignment in Responsive Design not working properly
+- Fixed: EA Creative Button | ‘Shikoba’ effect breaking the design
+- Fixed: EA Advanced Accordion | Saved Template is not showing properly
+- Fixed: EA Contact Form 7 | Submit button ‘Full Width’ not working
+- Fixed: EA Countdown | design broken on mobile device
+- Fixed: EA Product Grid | Draft products being displayed
+- Fixed: HTML(inline CSS) not working with <a> tag in some widgets
+- Improved: Added Target_Blank options in post widgets
+- Improved: EA Product Grid | not scrolling to top when you hit the pagination options
+- Removed: EA Progress Bar | Removed duplicate controls
+- Few minor bug fix and improvements
+
+= 4.7.0 - 24/05/2021 =
+
+- Added: EA Simple Menu widget
 
 = 4.6.6 - 09/05/2021 =
 

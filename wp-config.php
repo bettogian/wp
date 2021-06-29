@@ -20,16 +20,16 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'basededatos' );
+define( 'DB_NAME', 'artek_wp_local' );
 
 /** MySQL database username */
-define( 'DB_USER', 'usuario' );
+define( 'DB_USER', 'artek_user' );
 
 /** MySQL database password */
-define( 'DB_PASSWORD', 'password' );
+define( 'DB_PASSWORD', '#betto!' );
 
 /** MySQL hostname */
-define( 'DB_HOST', 'mi_IP' );
+define( 'DB_HOST', '192.254.250.162' );
 
 /** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8mb4' );

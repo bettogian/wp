@@ -3712,7 +3712,7 @@ class Login_Register extends Widget_Base {
 			$login_redirect_url = !empty( $this->ds[ 'redirect_url' ][ 'url' ] ) ? esc_url( $this->ds[ 'redirect_url' ][ 'url' ] ) : '';
 		}
 		?>
-        <div class="eael-login-registration-wrapper"
+        <div class="eael-login-registration-wrapper <?php echo empty( $form_image_id ) ? '' : esc_attr( 'has-illustration' ); ?>"
              data-is-ajax="<?php echo esc_attr( $this->get_settings_for_display( 'enable_ajax' ) ); ?>"
              data-widget-id="<?php echo esc_attr( $this->get_id() ); ?>"
              data-recaptcha-sitekey="<?php echo esc_attr( get_option( 'eael_recaptcha_sitekey' ) ); ?>"
@@ -4187,7 +4187,7 @@ class Login_Register extends Widget_Base {
 	 * @param string $form_type the type of form. Available values: login and register
 	 */
 	protected function print_form_header( $form_type = 'login' ) {
-		$title    = ! empty( $this->ds["{$form_type}_form_title"] ) ? esc_html( $this->ds["{$form_type}_form_title"] ) : '';
+		$title    = ! empty( $this->ds["{$form_type}_form_title"] ) ?  $this->ds["{$form_type}_form_title"]  : '';
 		$subtitle = ! empty( $this->ds["{$form_type}_form_subtitle"] ) ? esc_html( $this->ds["{$form_type}_form_subtitle"] ) : '';
 		if ( empty( $this->form_logo ) && empty( $title ) && empty( $subtitle ) ) {
 			return;
