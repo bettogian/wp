@@ -1,0 +1,79 @@
+[13-Sep-2021 01:57:40 UTC] PHP Warning:  Empty row packet body in C:\Server\wp\wp-includes\wp-db.php on line 2056
+[13-Sep-2021 01:57:40 UTC] PHP Stack trace:
+[13-Sep-2021 01:57:40 UTC] PHP   1. {main}() C:\Server\wp\wp-cron.php:0
+[13-Sep-2021 01:57:40 UTC] PHP   2. require_once() C:\Server\wp\wp-cron.php:44
+[13-Sep-2021 01:57:40 UTC] PHP   3. require_once() C:\Server\wp\wp-load.php:37
+[13-Sep-2021 01:57:40 UTC] PHP   4. require_once() C:\Server\wp\wp-config.php:95
+[13-Sep-2021 01:57:40 UTC] PHP   5. wp_not_installed() C:\Server\wp\wp-settings.php:159
+[13-Sep-2021 01:57:40 UTC] PHP   6. is_blog_installed() C:\Server\wp\wp-includes\load.php:727
+[13-Sep-2021 01:57:40 UTC] PHP   7. wp_load_alloptions() C:\Server\wp\wp-includes\functions.php:1724
+[13-Sep-2021 01:57:40 UTC] PHP   8. wpdb->get_results() C:\Server\wp\wp-includes\option.php:238
+[13-Sep-2021 01:57:40 UTC] PHP   9. wpdb->query() C:\Server\wp\wp-includes\wp-db.php:2695
+[13-Sep-2021 01:57:40 UTC] PHP  10. wpdb->_do_query() C:\Server\wp\wp-includes\wp-db.php:1945
+[13-Sep-2021 01:57:40 UTC] PHP  11. mysqli_query() C:\Server\wp\wp-includes\wp-db.php:2056
+[13-Sep-2021 01:57:40 UTC] PHP Warning:  mysqli_query(): (00000/0):  in C:\Server\wp\wp-includes\wp-db.php on line 2056
+[13-Sep-2021 01:57:40 UTC] PHP Stack trace:
+[13-Sep-2021 01:57:40 UTC] PHP   1. {main}() C:\Server\wp\wp-cron.php:0
+[13-Sep-2021 01:57:40 UTC] PHP   2. require_once() C:\Server\wp\wp-cron.php:44
+[13-Sep-2021 01:57:40 UTC] PHP   3. require_once() C:\Server\wp\wp-load.php:37
+[13-Sep-2021 01:57:40 UTC] PHP   4. require_once() C:\Server\wp\wp-config.php:95
+[13-Sep-2021 01:57:40 UTC] PHP   5. wp_not_installed() C:\Server\wp\wp-settings.php:159
+[13-Sep-2021 01:57:40 UTC] PHP   6. is_blog_installed() C:\Server\wp\wp-includes\load.php:727
+[13-Sep-2021 01:57:40 UTC] PHP   7. wp_load_alloptions() C:\Server\wp\wp-includes\functions.php:1724
+[13-Sep-2021 01:57:40 UTC] PHP   8. wpdb->get_results() C:\Server\wp\wp-includes\option.php:238
+[13-Sep-2021 01:57:40 UTC] PHP   9. wpdb->query() C:\Server\wp\wp-includes\wp-db.php:2695
+[13-Sep-2021 01:57:40 UTC] PHP  10. wpdb->_do_query() C:\Server\wp\wp-includes\wp-db.php:1945
+[13-Sep-2021 01:57:40 UTC] PHP  11. mysqli_query() C:\Server\wp\wp-includes\wp-db.php:2056
+[13-Sep-2021 01:57:40 UTC] PHP Warning:  mysqli_query(): MySQL server has gone away in C:\Server\wp\wp-includes\wp-db.php on line 2056
+[13-Sep-2021 01:57:40 UTC] PHP Stack trace:
+[13-Sep-2021 01:57:40 UTC] PHP   1. {main}() C:\Server\wp\wp-cron.php:0
+[13-Sep-2021 01:57:40 UTC] PHP   2. require_once() C:\Server\wp\wp-cron.php:44
+[13-Sep-2021 01:57:40 UTC] PHP   3. require_once() C:\Server\wp\wp-load.php:37
+[13-Sep-2021 01:57:40 UTC] PHP   4. require_once() C:\Server\wp\wp-config.php:95
+[13-Sep-2021 01:57:40 UTC] PHP   5. wp_not_installed() C:\Server\wp\wp-settings.php:159
+[13-Sep-2021 01:57:40 UTC] PHP   6. is_blog_installed() C:\Server\wp\wp-includes\load.php:727
+[13-Sep-2021 01:57:40 UTC] PHP   7. wp_load_alloptions() C:\Server\wp\wp-includes\functions.php:1724
+[13-Sep-2021 01:57:40 UTC] PHP   8. wpdb->get_results() C:\Server\wp\wp-includes\option.php:240
+[13-Sep-2021 01:57:40 UTC] PHP   9. wpdb->query() C:\Server\wp\wp-includes\wp-db.php:2695
+[13-Sep-2021 01:57:40 UTC] PHP  10. wpdb->_do_query() C:\Server\wp\wp-includes\wp-db.php:1945
+[13-Sep-2021 01:57:40 UTC] PHP  11. mysqli_query() C:\Server\wp\wp-includes\wp-db.php:2056
+[13-Sep-2021 01:57:40 UTC] PHP Warning:  mysqli_query(): Error reading result set's header in C:\Server\wp\wp-includes\wp-db.php on line 2056
+[13-Sep-2021 01:57:40 UTC] PHP Stack trace:
+[13-Sep-2021 01:57:40 UTC] PHP   1. {main}() C:\Server\wp\wp-cron.php:0
+[13-Sep-2021 01:57:40 UTC] PHP   2. require_once() C:\Server\wp\wp-cron.php:44
+[13-Sep-2021 01:57:40 UTC] PHP   3. require_once() C:\Server\wp\wp-load.php:37
+[13-Sep-2021 01:57:40 UTC] PHP   4. require_once() C:\Server\wp\wp-config.php:95
+[13-Sep-2021 01:57:40 UTC] PHP   5. wp_not_installed() C:\Server\wp\wp-settings.php:159
+[13-Sep-2021 01:57:40 UTC] PHP   6. is_blog_installed() C:\Server\wp\wp-includes\load.php:727
+[13-Sep-2021 01:57:40 UTC] PHP   7. wp_load_alloptions() C:\Server\wp\wp-includes\functions.php:1724
+[13-Sep-2021 01:57:40 UTC] PHP   8. wpdb->get_results() C:\Server\wp\wp-includes\option.php:240
+[13-Sep-2021 01:57:40 UTC] PHP   9. wpdb->query() C:\Server\wp\wp-includes\wp-db.php:2695
+[13-Sep-2021 01:57:40 UTC] PHP  10. wpdb->_do_query() C:\Server\wp\wp-includes\wp-db.php:1945
+[13-Sep-2021 01:57:40 UTC] PHP  11. mysqli_query() C:\Server\wp\wp-includes\wp-db.php:2056
+[13-Sep-2021 01:58:04 UTC] PHP Fatal error:  Maximum execution time of 120 seconds exceeded in C:\Server\wp\wp-includes\wp-db.php on line 2056
+[13-Sep-2021 01:58:04 UTC] PHP Stack trace:
+[13-Sep-2021 01:58:04 UTC] PHP   1. {main}() C:\Server\wp\index.php:0
+[13-Sep-2021 01:58:04 UTC] PHP   2. require() C:\Server\wp\index.php:17
+[13-Sep-2021 01:58:04 UTC] PHP   3. wp() C:\Server\wp\wp-blog-header.php:16
+[13-Sep-2021 01:58:04 UTC] PHP   4. WP->main() C:\Server\wp\wp-includes\functions.php:1291
+[13-Sep-2021 01:58:04 UTC] PHP   5. WP->query_posts() C:\Server\wp\wp-includes\class-wp.php:752
+[13-Sep-2021 01:58:04 UTC] PHP   6. WP_Query->query() C:\Server\wp\wp-includes\class-wp.php:629
+[13-Sep-2021 01:58:04 UTC] PHP   7. WP_Query->get_posts() C:\Server\wp\wp-includes\class-wp-query.php:3465
+[13-Sep-2021 01:58:04 UTC] PHP   8. update_post_caches() C:\Server\wp\wp-includes\class-wp-query.php:3212
+[13-Sep-2021 01:58:04 UTC] PHP   9. update_postmeta_cache() C:\Server\wp\wp-includes\post.php:7145
+[13-Sep-2021 01:58:04 UTC] PHP  10. update_meta_cache() C:\Server\wp\wp-includes\post.php:7162
+[13-Sep-2021 01:58:04 UTC] PHP  11. wpdb->get_results() C:\Server\wp\wp-includes\meta.php:1061
+[13-Sep-2021 01:58:04 UTC] PHP  12. wpdb->query() C:\Server\wp\wp-includes\wp-db.php:2695
+[13-Sep-2021 01:58:04 UTC] PHP  13. wpdb->_do_query() C:\Server\wp\wp-includes\wp-db.php:1945
+[13-Sep-2021 01:58:08 UTC] PHP Fatal error:  Maximum execution time of 120 seconds exceeded in C:\Server\wp\wp-includes\wp-db.php on line 2056
+[13-Sep-2021 01:58:08 UTC] PHP Stack trace:
+[13-Sep-2021 01:58:08 UTC] PHP   1. {main}() C:\Server\wp\wp-cron.php:0
+[13-Sep-2021 01:58:08 UTC] PHP   2. require_once() C:\Server\wp\wp-cron.php:44
+[13-Sep-2021 01:58:08 UTC] PHP   3. require_once() C:\Server\wp\wp-load.php:37
+[13-Sep-2021 01:58:08 UTC] PHP   4. require_once() C:\Server\wp\wp-config.php:95
+[13-Sep-2021 01:58:08 UTC] PHP   5. wp_not_installed() C:\Server\wp\wp-settings.php:159
+[13-Sep-2021 01:58:08 UTC] PHP   6. is_blog_installed() C:\Server\wp\wp-includes\load.php:727
+[13-Sep-2021 01:58:08 UTC] PHP   7. wp_load_alloptions() C:\Server\wp\wp-includes\functions.php:1724
+[13-Sep-2021 01:58:08 UTC] PHP   8. wpdb->get_results() C:\Server\wp\wp-includes\option.php:240
+[13-Sep-2021 01:58:08 UTC] PHP   9. wpdb->query() C:\Server\wp\wp-includes\wp-db.php:2695
+[13-Sep-2021 01:58:08 UTC] PHP  10. wpdb->_do_query() C:\Server\wp\wp-includes\wp-db.php:1969
