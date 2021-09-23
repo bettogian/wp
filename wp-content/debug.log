@@ -77,3 +77,86 @@
 [13-Sep-2021 01:58:08 UTC] PHP   8. wpdb->get_results() C:\Server\wp\wp-includes\option.php:240
 [13-Sep-2021 01:58:08 UTC] PHP   9. wpdb->query() C:\Server\wp\wp-includes\wp-db.php:2695
 [13-Sep-2021 01:58:08 UTC] PHP  10. wpdb->_do_query() C:\Server\wp\wp-includes\wp-db.php:1969
+[13-Sep-2021 02:25:55 UTC] PHP Fatal error:  Maximum execution time of 120 seconds exceeded in C:\Server\wp\wp-includes\wp-db.php on line 2056
+[13-Sep-2021 02:25:55 UTC] PHP Stack trace:
+[13-Sep-2021 02:25:55 UTC] PHP   1. {main}() C:\Server\wp\wp-cron.php:0
+[13-Sep-2021 02:25:55 UTC] PHP   2. require_once() C:\Server\wp\wp-cron.php:44
+[13-Sep-2021 02:25:55 UTC] PHP   3. require_once() C:\Server\wp\wp-load.php:37
+[13-Sep-2021 02:25:55 UTC] PHP   4. require_once() C:\Server\wp\wp-config.php:95
+[13-Sep-2021 02:25:55 UTC] PHP   5. wp_not_installed() C:\Server\wp\wp-settings.php:159
+[13-Sep-2021 02:25:55 UTC] PHP   6. is_blog_installed() C:\Server\wp\wp-includes\load.php:727
+[13-Sep-2021 02:25:55 UTC] PHP   7. wp_load_alloptions() C:\Server\wp\wp-includes\functions.php:1724
+[13-Sep-2021 02:25:55 UTC] PHP   8. wpdb->get_results() C:\Server\wp\wp-includes\option.php:238
+[13-Sep-2021 02:25:55 UTC] PHP   9. wpdb->query() C:\Server\wp\wp-includes\wp-db.php:2695
+[13-Sep-2021 02:25:55 UTC] PHP  10. wpdb->_do_query() C:\Server\wp\wp-includes\wp-db.php:1945
+[13-Sep-2021 02:29:55 UTC] PHP Warning:  Empty row packet body in C:\Server\wp\wp-includes\wp-db.php on line 2056
+[13-Sep-2021 02:29:55 UTC] PHP Stack trace:
+[13-Sep-2021 02:29:55 UTC] PHP   1. {main}() C:\Server\wp\wp-cron.php:0
+[13-Sep-2021 02:29:55 UTC] PHP   2. delete_transient() C:\Server\wp\wp-cron.php:149
+[13-Sep-2021 02:29:55 UTC] PHP   3. delete_option() C:\Server\wp\wp-includes\option.php:734
+[13-Sep-2021 02:29:55 UTC] PHP   4. wp_load_alloptions() C:\Server\wp\wp-includes\option.php:670
+[13-Sep-2021 02:29:55 UTC] PHP   5. wpdb->get_results() C:\Server\wp\wp-includes\option.php:238
+[13-Sep-2021 02:29:55 UTC] PHP   6. wpdb->query() C:\Server\wp\wp-includes\wp-db.php:2695
+[13-Sep-2021 02:29:55 UTC] PHP   7. wpdb->_do_query() C:\Server\wp\wp-includes\wp-db.php:1945
+[13-Sep-2021 02:29:55 UTC] PHP   8. mysqli_query() C:\Server\wp\wp-includes\wp-db.php:2056
+[13-Sep-2021 02:29:55 UTC] PHP Warning:  mysqli_query(): (00000/0):  in C:\Server\wp\wp-includes\wp-db.php on line 2056
+[13-Sep-2021 02:29:55 UTC] PHP Stack trace:
+[13-Sep-2021 02:29:55 UTC] PHP   1. {main}() C:\Server\wp\wp-cron.php:0
+[13-Sep-2021 02:29:55 UTC] PHP   2. delete_transient() C:\Server\wp\wp-cron.php:149
+[13-Sep-2021 02:29:55 UTC] PHP   3. delete_option() C:\Server\wp\wp-includes\option.php:734
+[13-Sep-2021 02:29:55 UTC] PHP   4. wp_load_alloptions() C:\Server\wp\wp-includes\option.php:670
+[13-Sep-2021 02:29:55 UTC] PHP   5. wpdb->get_results() C:\Server\wp\wp-includes\option.php:238
+[13-Sep-2021 02:29:55 UTC] PHP   6. wpdb->query() C:\Server\wp\wp-includes\wp-db.php:2695
+[13-Sep-2021 02:29:55 UTC] PHP   7. wpdb->_do_query() C:\Server\wp\wp-includes\wp-db.php:1945
+[13-Sep-2021 02:29:55 UTC] PHP   8. mysqli_query() C:\Server\wp\wp-includes\wp-db.php:2056
+[13-Sep-2021 02:29:55 UTC] PHP Fatal error:  Maximum execution time of 120 seconds exceeded in C:\Server\wp\wp-includes\wp-db.php on line 2056
+[13-Sep-2021 02:29:55 UTC] PHP Stack trace:
+[13-Sep-2021 02:29:55 UTC] PHP   1. {main}() C:\Server\wp\wp-cron.php:0
+[13-Sep-2021 02:29:55 UTC] PHP   2. delete_transient() C:\Server\wp\wp-cron.php:149
+[13-Sep-2021 02:29:55 UTC] PHP   3. delete_option() C:\Server\wp\wp-includes\option.php:734
+[13-Sep-2021 02:29:55 UTC] PHP   4. wp_load_alloptions() C:\Server\wp\wp-includes\option.php:670
+[13-Sep-2021 02:29:55 UTC] PHP   5. wpdb->get_results() C:\Server\wp\wp-includes\option.php:238
+[13-Sep-2021 02:29:55 UTC] PHP   6. wpdb->query() C:\Server\wp\wp-includes\wp-db.php:2695
+[13-Sep-2021 02:29:55 UTC] PHP   7. wpdb->_do_query() C:\Server\wp\wp-includes\wp-db.php:1945
+[13-Sep-2021 02:29:55 UTC] PHP Warning:  mysqli_query(): MySQL server has gone away in C:\Server\wp\wp-includes\wp-db.php on line 2056
+[13-Sep-2021 02:29:55 UTC] PHP Stack trace:
+[13-Sep-2021 02:29:55 UTC] PHP   1. {main}() C:\Server\wp\wp-cron.php:0
+[13-Sep-2021 02:29:55 UTC] PHP   2. delete_transient() C:\Server\wp\wp-cron.php:149
+[13-Sep-2021 02:29:55 UTC] PHP   3. delete_option() C:\Server\wp\wp-includes\option.php:734
+[13-Sep-2021 02:29:55 UTC] PHP   4. wp_load_alloptions() C:\Server\wp\wp-includes\option.php:670
+[13-Sep-2021 02:29:55 UTC] PHP   5. wpdb->get_results() C:\Server\wp\wp-includes\option.php:238
+[13-Sep-2021 02:29:55 UTC] PHP   6. wpdb->query() C:\Server\wp\wp-includes\wp-db.php:2695
+[13-Sep-2021 02:29:55 UTC] PHP   7. wpdb->_do_query() C:\Server\wp\wp-includes\wp-db.php:1945
+[13-Sep-2021 02:29:55 UTC] PHP   8. WP_Fatal_Error_Handler->handle() C:\Server\wp\wp-includes\class-wp-fatal-error-handler.php:0
+[13-Sep-2021 02:29:55 UTC] PHP   9. WP_Fatal_Error_Handler->display_error_template() C:\Server\wp\wp-includes\class-wp-fatal-error-handler.php:57
+[13-Sep-2021 02:29:55 UTC] PHP  10. WP_Fatal_Error_Handler->display_default_error_template() C:\Server\wp\wp-includes\class-wp-fatal-error-handler.php:152
+[13-Sep-2021 02:29:55 UTC] PHP  11. wp_die() C:\Server\wp\wp-includes\class-wp-fatal-error-handler.php:233
+[13-Sep-2021 02:29:55 UTC] PHP  12. _default_wp_die_handler() C:\Server\wp\wp-includes\functions.php:3421
+[13-Sep-2021 02:29:55 UTC] PHP  13. get_language_attributes() C:\Server\wp\wp-includes\functions.php:3486
+[13-Sep-2021 02:29:55 UTC] PHP  14. get_option() C:\Server\wp\wp-includes\general-template.php:4037
+[13-Sep-2021 02:29:55 UTC] PHP  15. wp_load_alloptions() C:\Server\wp\wp-includes\option.php:117
+[13-Sep-2021 02:29:55 UTC] PHP  16. wpdb->get_results() C:\Server\wp\wp-includes\option.php:238
+[13-Sep-2021 02:29:55 UTC] PHP  17. wpdb->query() C:\Server\wp\wp-includes\wp-db.php:2695
+[13-Sep-2021 02:29:55 UTC] PHP  18. wpdb->_do_query() C:\Server\wp\wp-includes\wp-db.php:1945
+[13-Sep-2021 02:29:55 UTC] PHP  19. mysqli_query() C:\Server\wp\wp-includes\wp-db.php:2056
+[13-Sep-2021 02:29:55 UTC] PHP Warning:  mysqli_query(): Error reading result set's header in C:\Server\wp\wp-includes\wp-db.php on line 2056
+[13-Sep-2021 02:29:55 UTC] PHP Stack trace:
+[13-Sep-2021 02:29:55 UTC] PHP   1. {main}() C:\Server\wp\wp-cron.php:0
+[13-Sep-2021 02:29:55 UTC] PHP   2. delete_transient() C:\Server\wp\wp-cron.php:149
+[13-Sep-2021 02:29:55 UTC] PHP   3. delete_option() C:\Server\wp\wp-includes\option.php:734
+[13-Sep-2021 02:29:55 UTC] PHP   4. wp_load_alloptions() C:\Server\wp\wp-includes\option.php:670
+[13-Sep-2021 02:29:55 UTC] PHP   5. wpdb->get_results() C:\Server\wp\wp-includes\option.php:238
+[13-Sep-2021 02:29:55 UTC] PHP   6. wpdb->query() C:\Server\wp\wp-includes\wp-db.php:2695
+[13-Sep-2021 02:29:55 UTC] PHP   7. wpdb->_do_query() C:\Server\wp\wp-includes\wp-db.php:1945
+[13-Sep-2021 02:29:55 UTC] PHP   8. WP_Fatal_Error_Handler->handle() C:\Server\wp\wp-includes\class-wp-fatal-error-handler.php:0
+[13-Sep-2021 02:29:55 UTC] PHP   9. WP_Fatal_Error_Handler->display_error_template() C:\Server\wp\wp-includes\class-wp-fatal-error-handler.php:57
+[13-Sep-2021 02:29:55 UTC] PHP  10. WP_Fatal_Error_Handler->display_default_error_template() C:\Server\wp\wp-includes\class-wp-fatal-error-handler.php:152
+[13-Sep-2021 02:29:55 UTC] PHP  11. wp_die() C:\Server\wp\wp-includes\class-wp-fatal-error-handler.php:233
+[13-Sep-2021 02:29:55 UTC] PHP  12. _default_wp_die_handler() C:\Server\wp\wp-includes\functions.php:3421
+[13-Sep-2021 02:29:55 UTC] PHP  13. get_language_attributes() C:\Server\wp\wp-includes\functions.php:3486
+[13-Sep-2021 02:29:55 UTC] PHP  14. get_option() C:\Server\wp\wp-includes\general-template.php:4037
+[13-Sep-2021 02:29:55 UTC] PHP  15. wp_load_alloptions() C:\Server\wp\wp-includes\option.php:117
+[13-Sep-2021 02:29:55 UTC] PHP  16. wpdb->get_results() C:\Server\wp\wp-includes\option.php:238
+[13-Sep-2021 02:29:55 UTC] PHP  17. wpdb->query() C:\Server\wp\wp-includes\wp-db.php:2695
+[13-Sep-2021 02:29:55 UTC] PHP  18. wpdb->_do_query() C:\Server\wp\wp-includes\wp-db.php:1945
+[13-Sep-2021 02:29:55 UTC] PHP  19. mysqli_query() C:\Server\wp\wp-includes\wp-db.php:2056
