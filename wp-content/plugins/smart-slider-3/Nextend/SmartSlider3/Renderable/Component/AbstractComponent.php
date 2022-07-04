@@ -113,7 +113,7 @@ abstract class AbstractComponent {
     }
 
     /**
-     * @return AbstractRenderableOwner
+     * @return Slide
      */
     public function getOwner() {
         return $this->owner;
@@ -491,11 +491,18 @@ abstract class AbstractComponent {
             $this->createDeviceProperty('fontsize', 100);
         }
 
-        $devices = $this->owner->getAvailableDevices();
+        $devices         = $this->owner->getAvailableDevices();
+        $desktopFontSize = $this->data->get('desktopportraitfontsize');
         foreach ($devices as $device) {
             $fontSize = $this->data->get($device . 'fontsize');
-            if ($fontSize !== '' && $fontSize != 100) {
-                $this->style->add($device, '', '--ssfont-scale:' . $fontSize / 100 . '');
+            if ($fontSize !== '') {
+                if ($device === 'desktopportrait') {
+                    if ($fontSize != 100) {
+                        $this->style->add($device, '', '--ssfont-scale:' . $fontSize / 100 . '');
+                    }
+                } else if ($fontSize != $desktopFontSize) {
+                    $this->style->add($device, '', '--ssfont-scale:' . $fontSize / 100 . '');
+                }
             }
         }
     }
@@ -595,9 +602,9 @@ abstract class AbstractComponent {
         $this->addLocalStyle('normal', 'background', $this->getBackgroundCSS($color, $gradient, $colorEnd, $backgroundStyle) . $backgroundStyle);
 
 
-        $colorHover       = $this->data->get('bgcolor-hover');
+        $colorHover       = $this->owner->fill($this->data->get('bgcolor-hover'));
         $gradientHover    = $this->data->get('bgcolorgradient-hover');
-        $colorEndHover    = $this->data->get('bgcolorgradientend-hover');
+        $colorEndHover    = $this->owner->fill($this->data->get('bgcolorgradientend-hover'));
         $isHoverDifferent = false;
         if (!empty($colorHover) && $colorHover != $color) {
             $isHoverDifferent = true;
@@ -613,12 +620,12 @@ abstract class AbstractComponent {
             if (empty($gradientHover)) $gradientHover = $gradient;
             if (empty($colorEndHover)) $colorEndHover = $colorEnd;
 
-            $this->addLocalStyle('hover', 'background', $this->getBackgroundCSS($colorHover, $gradientHover, $colorEndHover, $backgroundStyle));
+            $this->addLocalStyle('hover', 'background', $this->getBackgroundCSS($colorHover, $gradientHover, $colorEndHover, $backgroundStyle, true));
         }
     }
 
-    protected function getBackgroundCSS($color, $gradient, $colorend, $backgroundStyle) {
-        if (Color::hex2alpha($color) != 0 || ($gradient != 'off' && Color::hex2alpha($colorend) != 0)) {
+    protected function getBackgroundCSS($color, $gradient, $colorend, $backgroundStyle, $isHover = false) {
+        if (Color::hex2alpha($color) != 0 || ($gradient != 'off' && Color::hex2alpha($colorend) != 0) || $isHover) {
             $this->hasBackground = true;
             switch ($gradient) {
                 case 'horizontal':

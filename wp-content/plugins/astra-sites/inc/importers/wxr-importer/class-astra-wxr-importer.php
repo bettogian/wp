@@ -310,14 +310,14 @@ class Astra_WXR_Importer {
 			exit;
 		}
 
-		if ( ! wp_doing_ajax() ) {
-			// Time to run the import!
-			set_time_limit( 0 );
+		// Time to run the import!
+		set_time_limit( 0 );
 
-			// Ensure we're not buffered.
-			wp_ob_end_flush_all();
-			flush();
-		}
+		// Ensure we're not buffered.
+		wp_ob_end_flush_all();
+		flush();
+
+		do_action( 'astra_sites_before_sse_import' );
 
 		// Enable default GD library.
 		add_filter( 'wp_image_editors', array( $this, 'enable_wp_image_editor_gd' ) );
@@ -407,7 +407,7 @@ class Astra_WXR_Importer {
 			'_ajax_nonce' => wp_create_nonce( 'astra-sites' ),
 			'xml_id'      => $post_id,
 		);
-		$url  = add_query_arg( urlencode_deep( $args ), admin_url( 'admin-ajax.php' ) );
+		$url  = add_query_arg( urlencode_deep( $args ), admin_url( 'admin-ajax.php', 'relative' ) );
 
 		$data = $this->get_data( $path );
 

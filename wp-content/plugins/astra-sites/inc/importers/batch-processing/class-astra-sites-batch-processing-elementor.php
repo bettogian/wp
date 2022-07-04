@@ -108,6 +108,7 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Local {
 					foreach ( $ids_mapping as $old_id => $new_id ) {
 						$data = str_replace( '[wpforms id=\"' . $old_id, '[wpforms id=\"' . $new_id, $data );
 						$data = str_replace( '"select_form":"' . $old_id, '"select_form":"' . $new_id, $data );
+						$data = str_replace( '"form_id":"' . $old_id, '"form_id":"' . $new_id, $data );
 					}
 				}
 
@@ -146,6 +147,9 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Local {
 				// !important, Clear the cache after images import.
 				Plugin::$instance->files_manager->clear_cache();
 			}
+
+			// Clean the post excerpt.
+			astra_sites_empty_post_excerpt( $post_id );
 		}
 	}
 }

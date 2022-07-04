@@ -91,7 +91,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 
 			Astra_Sites_Importer_Log::add( '---- Processing WordPress Posts / Pages - for "Gutenberg" ----' );
 
-			$post_types = apply_filters( 'astra_sites_gutenberg_batch_process_post_types', array( 'page' ) );
+			$post_types = apply_filters( 'astra_sites_gutenberg_batch_process_post_types', array( 'page', 'wp_block' ) );
 			if ( defined( 'WP_CLI' ) ) {
 				WP_CLI::line( 'For post types: ' . implode( ', ', $post_types ) );
 			}
@@ -190,6 +190,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 				array(
 					'ID'           => $post_id,
 					'post_content' => $content,
+					'post_excerpt' => '',
 				)
 			);
 		}
@@ -203,8 +204,6 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 		 * @return array           Hotlink image array.
 		 */
 		public function get_content( $content = '' ) {
-
-			$content = stripslashes( $content );
 
 			// Extract all links.
 			preg_match_all( '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $content, $match );

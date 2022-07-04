@@ -117,22 +117,43 @@ class AdminHelper {
         PageFlow::markApplicationEnd();
     }
 
+    private function checkForCap() {
+
+        if (!current_user_can('unfiltered_html')) {
+            if (is_multisite()) {
+                $documentationUrl = 'https://smartslider.helpscoutdocs.com/article/1983-how-to-give-access-to-smart-slider-for-non-admin-users#multisite';
+            } else {
+                $documentationUrl = 'https://smartslider.helpscoutdocs.com/article/1983-how-to-give-access-to-smart-slider-for-non-admin-users#wordpress';
+            }
+
+            wp_die(sprintf('<div class="error">%s</div>', wpautop(sprintf('Smart Slider allows you to place many things on your slider, so only users with the %s capability can have access to it. You do not have this capability and only %s.', '<i>unfiltered_html</i>', sprintf('<a href="%s" target="_blank">%s</a>', $documentationUrl, 'the administrator of your website can grant it to you')))));
+        }
+    }
+
     public function display_admin() {
+
+        $this->checkForCap();
 
         $this->display_controller('sliders', 'gettingstarted');
     }
 
     public function display_admin_index() {
 
+        $this->checkForCap();
+
         $this->display_controller('sliders');
     }
 
     public function display_help() {
 
+        $this->checkForCap();
+
         $this->display_controller('help');
     }
 
     public function display_go_pro() {
+
+        $this->checkForCap();
 
         $this->display_controller('goPro');
     }
@@ -207,10 +228,17 @@ class AdminHelper {
         ));
 
 
-        $query   = 'SELECT sliders.title, sliders.id, slides.thumbnail
+        $query   = 'SELECT sliders.title, sliders.id
             FROM ' . $wpdb->prefix . 'nextend2_smartslider3_sliders AS sliders
-            LEFT JOIN ' . $wpdb->prefix . 'nextend2_smartslider3_slides AS slides ON slides.id = (SELECT id FROM ' . $wpdb->prefix . 'nextend2_smartslider3_slides WHERE slider = sliders.id AND published = 1 AND generator_id = 0 AND thumbnail NOT LIKE \'\' ORDER BY ordering DESC LIMIT 1)
-            WHERE sliders.status = \'published\'
+            LEFT JOIN ' . $wpdb->prefix . 'nextend2_smartslider3_sliders_xref AS xref ON xref.slider_id = sliders.id
+                        WHERE 
+                            (
+                                xref.group_id IS NULL 
+                                OR xref.group_id = 0
+                                OR (SELECT _sliders.status FROM ' . $wpdb->prefix . 'nextend2_smartslider3_sliders AS _sliders WHERE _sliders.id = xref.group_id ) LIKE \'published\'
+                            )
+                            
+            AND sliders.status = \'published\'
             ORDER BY time DESC LIMIT 10';
         $sliders = $wpdb->get_results($query, ARRAY_A);
 

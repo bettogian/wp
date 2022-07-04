@@ -12,6 +12,7 @@ use \Elementor\Group_Control_Background;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
+use Elementor\Icons_Manager;
 use Elementor\Modules\DynamicTags\Module as TagsModule;
 use Elementor\Repeater;
 use \Elementor\Widget_Base;
@@ -66,7 +67,7 @@ class Pricing_Table extends Widget_Base
         return 'https://essential-addons.com/elementor/docs/pricing-table/';
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
 
         /**
@@ -337,6 +338,10 @@ class Pricing_Table extends Widget_Base
                 'label'   => esc_html__( 'Icon Color', 'essential-addons-for-elementor-lite' ),
                 'type'    => Controls_Manager::COLOR,
                 'default' => '#00C853',
+                'selectors' => [
+                    "{{WRAPPER}} {{CURRENT_ITEM}} .li-icon i" => 'color: {{VALUE}};',
+                    "{{WRAPPER}} {{CURRENT_ITEM}} .li-icon svg" => 'color: {{VALUE}} !important; fill: {{VALUE}} !important;',
+                ],
             ]
         );
 
@@ -673,11 +678,11 @@ class Pricing_Table extends Widget_Base
                 'options'   => [
                     'left'  => [
                         'title' => __('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'right' => [
                         'title' => __('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                 ],
                 'default'   => 'right',
@@ -710,7 +715,7 @@ class Pricing_Table extends Widget_Base
                         ],
                     ],
                     'default'     => '1',
-                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.com/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
                 ]
             );
 
@@ -789,6 +794,8 @@ class Pricing_Table extends Widget_Base
                     ],
                 ],
                 'selectors' => [
+                    '{{WRAPPER}}' => 'border-radius: {{SIZE}}px;',
+                    '{{WRAPPER}} .eael-pricing' => 'border-radius: {{SIZE}}px;',
                     '{{WRAPPER}} .eael-pricing .eael-pricing-item' => 'border-radius: {{SIZE}}px;',
                 ],
             ]
@@ -813,15 +820,15 @@ class Pricing_Table extends Widget_Base
                 'options'      => [
                     'left'   => [
                         'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-center',
+                        'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
                         'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                 ],
                 'default'      => 'center',
@@ -838,15 +845,15 @@ class Pricing_Table extends Widget_Base
                 'options'      => [
                     'left'   => [
                         'title' => esc_html__('Left', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-left',
+                        'icon'  => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => esc_html__('Center', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-center',
+                        'icon'  => 'eicon-text-align-center',
                     ],
                     'right'  => [
                         'title' => esc_html__('Right', 'essential-addons-for-elementor-lite'),
-                        'icon'  => 'fa fa-align-right',
+                        'icon'  => 'eicon-text-align-right',
                     ],
                 ],
                 'default'      => 'center',
@@ -1251,6 +1258,27 @@ class Pricing_Table extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'eael_pricing_table_list_item_icon_size_svg',
+            [
+                'label'     => esc_html__('SVG Icon Size', 'essential-addons-for-elementor-lite'),
+                'type'      => Controls_Manager::SLIDER,
+                'default'   => [
+                    'size' => 20,
+                    'unit' => 'px',
+                ],
+                'range'     => [
+                    'px' => [
+                        'max' => 50,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-pricing-item .body ul li .li-icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .eael-pricing-item .body ul li .li-icon svg'   => 'font-size: {{SIZE}}{{UNIT}}; width: 1em; height: 1em;',
+                ],
+            ]
+        );
+
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -1271,6 +1299,9 @@ class Pricing_Table extends Widget_Base
             [
                 'label' => esc_html__('Ribbon', 'essential-addons-for-elementor-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'eael_pricing_table_featured' => 'yes',
+                ],
             ]
         );
 
@@ -1462,6 +1493,14 @@ class Pricing_Table extends Widget_Base
             [
                 'label' => esc_html__('Tooltip', 'essential-addons-for-elementor-lite'),
                 'tab'   => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'eael_pricing_table_tooltip_typography',
+                'selector' => '.tooltipster-base.tooltipster-sidetip .tooltipster-content',
             ]
         );
 
@@ -2030,13 +2069,20 @@ class Pricing_Table extends Widget_Base
             <?php
             foreach ($settings['eael_pricing_table_items'] as $item) :
 
+                $obj->add_render_attribute(
+                    'pricing_feature_item' . $counter, 
+                    [ 
+                        'class' => 'elementor-repeater-item-' . esc_attr( $item['_id'] ),
+                    ]
+                );
+
                 if ('yes' !== $item['eael_pricing_table_icon_mood']) {
                     $obj->add_render_attribute('pricing_feature_item' . $counter, 'class', 'disable-item');
                 }
 
                 if ('yes' === $item['eael_pricing_item_tooltip']) {
                     $obj->add_render_attribute(
-                        'pricing_feature_item' . $counter,
+                        'pricing_feature_item_tooltip' . $counter,
                         [
                             'class' => 'tooltip',
                             'title' => HelperClass::eael_wp_kses($item['eael_pricing_item_tooltip_content']),
@@ -2048,36 +2094,39 @@ class Pricing_Table extends Widget_Base
                 if ('yes' == $item['eael_pricing_item_tooltip']) {
 
                     if ($item['eael_pricing_item_tooltip_side']) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-side', $item['eael_pricing_item_tooltip_side']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-side', $item['eael_pricing_item_tooltip_side']);
                     }
 
                     if ($item['eael_pricing_item_tooltip_trigger']) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-trigger', $item['eael_pricing_item_tooltip_trigger']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-trigger', $item['eael_pricing_item_tooltip_trigger']);
                     }
 
                     if ($item['eael_pricing_item_tooltip_animation']) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-animation', $item['eael_pricing_item_tooltip_animation']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-animation', $item['eael_pricing_item_tooltip_animation']);
                     }
 
                     if (!empty($item['pricing_item_tooltip_animation_duration'])) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-animation_duration', $item['pricing_item_tooltip_animation_duration']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-animation_duration', $item['pricing_item_tooltip_animation_duration']);
                     }
 
                     if (!empty($item['eael_pricing_table_toolip_arrow'])) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-arrow', $item['eael_pricing_table_toolip_arrow']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-arrow', $item['eael_pricing_table_toolip_arrow']);
                     }
 
                     if (!empty($item['eael_pricing_item_tooltip_theme'])) {
-                        $obj->add_render_attribute('pricing_feature_item' . $counter, 'data-theme', $item['eael_pricing_item_tooltip_theme']);
+                        $obj->add_render_attribute('pricing_feature_item_tooltip' . $counter, 'data-theme', $item['eael_pricing_item_tooltip_theme']);
                     }
                 }
             ?>
                 <li <?php echo $obj->get_render_attribute_string('pricing_feature_item' . $counter); ?>>
                     <?php if ('show' === $settings['eael_pricing_table_icon_enabled']) : ?>
-                        <span class="li-icon" style="color:<?php echo esc_attr($item['eael_pricing_table_list_icon_color']); ?>">
+                        <?php $eael_pricing_table_list_icon_color = HelperClass::eael_fetch_color_or_global_color($item, 'eael_pricing_table_list_icon_color'); ?>
+                        
+                        <span class="li-icon" style="color:<?php echo esc_attr($eael_pricing_table_list_icon_color); ?>;fill:<?php echo esc_attr($eael_pricing_table_list_icon_color); ?>;" >
                             <?php if (isset($item['__fa4_migrated']['eael_pricing_table_list_icon_new']) || empty($item['eael_pricing_table_list_icon'])) { ?>
                                 <?php if (isset($item['eael_pricing_table_list_icon_new']['value']['url'])) : ?>
-                                    <img src="<?php echo $item['eael_pricing_table_list_icon_new']['value']['url']; ?>" alt="<?php echo esc_attr(get_post_meta($item['eael_pricing_table_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?>" />
+                                    <?php Icons_Manager::render_icon( $item['eael_pricing_table_list_icon_new'], [ 'aria-hidden' => 'true' ] ); ?>
+<!--                                    <img src="--><?php //echo $item['eael_pricing_table_list_icon_new']['value']['url']; ?><!--" alt="--><?php //echo esc_attr(get_post_meta($item['eael_pricing_table_list_icon_new']['value']['id'], '_wp_attachment_image_alt', true)); ?><!--" />-->
                                 <?php else : ?>
                                     <i class="<?php echo $item['eael_pricing_table_list_icon_new']['value']; ?>"></i>
                                 <?php endif; ?>
@@ -2086,7 +2135,7 @@ class Pricing_Table extends Widget_Base
                             <?php } ?>
                         </span>
                     <?php endif; ?>
-                    <?php echo HelperClass::eael_wp_kses($item['eael_pricing_table_item']); ?>
+                    <span <?php echo $obj->get_render_attribute_string('pricing_feature_item_tooltip' . $counter); ?>><?php echo HelperClass::eael_wp_kses($item['eael_pricing_table_item']); ?></span>
                 </li>
             <?php
                 $counter++;

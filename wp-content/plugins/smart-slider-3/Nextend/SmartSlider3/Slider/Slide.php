@@ -338,7 +338,16 @@ class Slide extends AbstractRenderableOwner {
 
             $mainContainer = new ComponentSlide($this, $this->slide);
 
-            $this->html = '<div tabindex="-1" class="n2-ss-slide--focus" role="note">' . $this->getTitle() . '</div>';
+            $attributes = array(
+                'role'  => 'note',
+                'class' => 'n2-ss-slide--focus'
+            );
+
+            if (!isset($this->linkAttributes['role']) || $this->linkAttributes['role'] != 'button') {
+                $attributes['tabindex'] = '-1';
+            }
+
+            $this->html = Html::tag('div', $attributes, Sanitize::remove_all_html($this->getTitle()));
             $this->html .= Html::tag('div', $this->containerAttributes, $mainContainer->render($this->sliderObject->isAdmin));
         }
     }
@@ -618,7 +627,7 @@ class Slide extends AbstractRenderableOwner {
 
     public function getTitle($isAdmin = false) {
 
-        return Sanitize::esc_html($this->fill($this->title));
+        return $this->fill($this->title);
     }
 
     public function getDescription() {
@@ -843,7 +852,7 @@ class Slide extends AbstractRenderableOwner {
         $attributes['src'] = $imageUrl;
         $this->addImage($imageUrl);
 
-        return Html::tag('img', $attributes);
+        return Html::tag('img', $attributes, false);
     }
 
     public function getThumbnailType() {
@@ -889,6 +898,6 @@ class Slide extends AbstractRenderableOwner {
 
         $sources[] = Html::tag('img', $attributes, false);
 
-        return HTML::tag('picture', array(), implode('', $sources));
+        return HTML::tag('picture', Html::addExcludeLazyLoadAttributes(), implode('', $sources));
     }
 }

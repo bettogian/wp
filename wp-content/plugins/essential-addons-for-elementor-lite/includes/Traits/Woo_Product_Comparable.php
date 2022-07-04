@@ -46,9 +46,7 @@ trait Woo_Product_Comparable {
 			'stock'       => __( 'Availability', 'essential-addons-for-elementor-lite' ),
 			'weight'      => __( 'weight', 'essential-addons-for-elementor-lite' ),
 			'dimension'   => __( 'Dimension', 'essential-addons-for-elementor-lite' ),
-			'pa_color'    => __( 'Color', 'essential-addons-for-elementor-lite' ),
-			'pa_size'     => __( 'Size', 'essential-addons-for-elementor-lite' ),
-		] );
+		] + self::get_wc_attr_taxonomies_list() );
 	}
 
 	public static function get_themes() {
@@ -114,6 +112,18 @@ trait Woo_Product_Comparable {
 			],
 		] );
 	}
+
+	/*
+	 * return woocommerce attribute taxonomies list
+	 */
+	public static function get_wc_attr_taxonomies_list(){
+		$attributes_tax =  wc_get_attribute_taxonomies();
+		$data = [];
+		foreach ($attributes_tax as $item){
+			$data[wc_attribute_taxonomy_name($item->attribute_name)] = $item->attribute_label;
+		}
+		return $data;
+    }
 
 	protected function init_content_wc_notice_controls() {
 		if ( ! function_exists( 'WC' ) ) {
@@ -1839,7 +1849,7 @@ trait Woo_Product_Comparable {
 		                                    echo '</a>';
 	                                    }
 	                                    if ( 'theme-4' === $theme ) {
-		                                    echo ! empty( $product->fields['title'] ) ? sprintf( "<p class='product-title'>%s</p>", esc_html( $product->fields['title'] ) ) : '&nbsp;';
+		                                    echo ! empty( $product->fields['title'] ) ? sprintf( "<p class='product-title'>%s</p>", HelperClass::eael_wp_kses( $product->fields['title'] ) ) : '&nbsp;';
 		                                    echo ! empty( $product->fields['price'] ) ? wp_kses_post( $product->fields['price'] ) : '&nbsp;';
 	                                    }
 	                                    echo '</span>';
@@ -1961,7 +1971,7 @@ trait Woo_Product_Comparable {
 				foreach ( $fields as $field => $name ) {
 					switch ( $field ) {
 						case 'title':
-							$product->fields[ $field ] = $product->get_title();
+							$product->fields[ $field ] = HelperClass::eael_wp_kses($product->get_title());
 							break;
 						case 'price':
 							$product->fields[ $field ] = $product->get_price_html();
@@ -2140,10 +2150,10 @@ trait Woo_Product_Comparable {
 			$p_exist = ! empty( $product_ids ) && is_array( $product_ids );
 			if ( ! empty( $_POST['remove_product'] ) && $p_exist ) {
 			    $product_ids = array_filter($product_ids, function ($id) use ($product_id){
-                    return $id != $product_id;
+                    return $id != intval( $product_id );
 			    });
 			} else {
-			    $product_ids[] = $product_id;
+			    $product_ids[] = intval( $product_id );
 			}
 		}
 
@@ -2204,7 +2214,7 @@ trait Woo_Product_Comparable {
 				foreach ( $fields as $field => $name ) {
 					switch ( $field ) {
 						case 'title':
-							$product->fields[ $field ] = $product->get_title();
+							$product->fields[ $field ] = HelperClass::eael_wp_kses($product->get_title());
 							break;
 						case 'price':
 							$product->fields[ $field ] = $product->get_price_html();

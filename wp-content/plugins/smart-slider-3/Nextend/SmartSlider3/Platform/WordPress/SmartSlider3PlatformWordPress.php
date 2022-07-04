@@ -2,7 +2,9 @@
 
 namespace Nextend\SmartSlider3\Platform\WordPress;
 
+use Nextend\Framework\Asset\Predefined;
 use Nextend\Framework\WordPress\AssetInjector;
+use Nextend\SmartSlider3\Application\ApplicationSmartSlider3;
 use Nextend\SmartSlider3\Platform\AbstractSmartSlider3Platform;
 use Nextend\SmartSlider3\Platform\WordPress\Admin\AdminHelper;
 use Nextend\SmartSlider3\Platform\WordPress\Integration\ACF\ACF;
@@ -19,6 +21,7 @@ use Nextend\SmartSlider3\Platform\WordPress\Integration\NimbleBuilder\NimbleBuil
 use Nextend\SmartSlider3\Platform\WordPress\Integration\OxygenBuilder\OxygenBuilder;
 use Nextend\SmartSlider3\Platform\WordPress\Integration\RankMath\RankMath;
 use Nextend\SmartSlider3\Platform\WordPress\Integration\TablePress\TablePress;
+use Nextend\SmartSlider3\Platform\WordPress\Integration\TatsuBuilder\TatsuBuilder;
 use Nextend\SmartSlider3\Platform\WordPress\Integration\ThemifyBuilder\ThemifyBuilder;
 use Nextend\SmartSlider3\Platform\WordPress\Integration\Unyson\Unyson;
 use Nextend\SmartSlider3\Platform\WordPress\Integration\VisualComposer1\VisualComposer1;
@@ -42,6 +45,18 @@ class SmartSlider3PlatformWordPress extends AbstractSmartSlider3Platform {
         new Shortcode();
 
         new AdminHelper();
+
+        add_action('admin_head', function () {
+
+            if (wp_script_is('gutenberg-smartslider3')) {
+
+                Predefined::frontend();
+                Predefined::backend();
+                ApplicationSmartSlider3::getInstance()
+                                       ->getApplicationTypeAdmin()
+                                       ->enqueueAssets();
+            }
+        });
 
         if (SmartSlider3Info::$plan == 'pro' || SmartSlider3Info::$channel != 'stable') {
             WordPressUpdate::getInstance();
@@ -115,6 +130,8 @@ class SmartSlider3PlatformWordPress extends AbstractSmartSlider3Platform {
         new RankMath();
 
         new ThemifyBuilder();
+
+        new TatsuBuilder();
     }
 
     /**

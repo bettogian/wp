@@ -66,15 +66,8 @@ class Addons {
 
 		// JavaScript.
 		wp_enqueue_script(
-			'jquery-matchheight',
-			WPFORMS_PLUGIN_URL . 'assets/js/jquery.matchHeight-min.js',
-			[ 'jquery' ],
-			'0.7.0'
-		);
-
-		wp_enqueue_script(
 			'listjs',
-			WPFORMS_PLUGIN_URL . 'assets/js/list.min.js',
+			WPFORMS_PLUGIN_URL . 'assets/lib/list.min.js',
 			[ 'jquery' ],
 			'1.5.0'
 		);
@@ -95,8 +88,8 @@ class Addons {
                      %4$s
                  </a>
              </p>',
-			esc_html__( 'WPForms Addons is a PRO feature.', 'wpforms-lite' ),
-			esc_html__( 'Please upgrade to the PRO plan to unlock them and more awesome features.', 'wpforms-lite' ),
+			esc_html__( 'WPForms Addons are a PRO feature', 'wpforms-lite' ),
+			esc_html__( 'Please upgrade to PRO to unlock our addons, advanced form fields, and more!', 'wpforms-lite' ),
 			esc_url( wpforms_admin_upgrade_link( 'addons' ) ),
 			esc_html__( 'Upgrade Now', 'wpforms-lite' )
 		);
@@ -123,8 +116,8 @@ class Addons {
 		echo wpforms_render( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			'admin/addons',
 			[
-				'upgrade_link' => wpforms_admin_upgrade_link( 'addons' ),
-				'addons'       => $addons,
+				'upgrade_link_base' => wpforms_admin_upgrade_link( 'addons' ),
+				'addons'            => $addons,
 			],
 			true
 		);

@@ -2,6 +2,8 @@
 
 namespace Essential_Addons_Elementor\Traits;
 
+use function Better_Payment\Lite\Classes\better_payment_dd;
+
 if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
@@ -16,7 +18,8 @@ trait Twitter_Feed
     public function twitter_feed_render_items($id, $settings, $class = '')
     {
         $token = get_option($id . '_' . $settings['eael_twitter_feed_ac_name'] . '_tf_token');
-        $cache_key = $id . '_' . $settings['eael_twitter_feed_ac_name'].$settings['eael_twitter_feed_data_cache_limit'] . '_tf_cache';
+	    $expiration = ! empty( $settings['eael_auto_clear_cache'] ) && ! empty( $settings['eael_twitter_feed_cache_limit'] ) ? absint( $settings['eael_twitter_feed_cache_limit'] ) * MINUTE_IN_SECONDS : DAY_IN_SECONDS;
+	    $cache_key = $settings['eael_twitter_feed_ac_name'] . '_' . $expiration . '_' . md5( $settings['eael_twitter_feed_hashtag_name'] . $settings['eael_twitter_feed_consumer_key'] . $settings['eael_twitter_feed_consumer_secret'] ) . '_tf_cache';
         $items = get_transient( $cache_key );
         $html = '';
 
@@ -49,14 +52,6 @@ trait Twitter_Feed
                 }
             }
 
-            $args = array(
-                'httpversion' => '1.1',
-                'blocking' => true,
-                'headers' => array(
-                    'Authorization' => "Bearer $token",
-                ),
-            );
-
             add_filter('https_ssl_verify', '__return_false');
 
             $response = wp_remote_get('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' . $settings['eael_twitter_feed_ac_name'] . '&count=999&tweet_mode=extended', [
@@ -67,15 +62,19 @@ trait Twitter_Feed
                 ],
             ]);
 
-            if (!is_wp_error($response)) {
-                $items = json_decode(wp_remote_retrieve_body($response), true);
-                set_transient( $cache_key, $items, $settings['eael_twitter_feed_data_cache_limit'] * MINUTE_IN_SECONDS);
-            }
+	        if ( is_wp_error( $response ) ) {
+		        return $html;
+	        }
+
+	        if ( ! empty( $response['response'] ) && $response['response']['code'] == 200 ) {
+		        $items      = json_decode( wp_remote_retrieve_body( $response ), true );
+		        set_transient( $cache_key, $items, $expiration );
+	        }
         }
 
-        if (empty($items)) {
-            return;
-        }
+	    if ( empty( $items ) ) {
+		    return $html;
+	    }
 
         if ($settings['eael_twitter_feed_hashtag_name']) {
             foreach ($items as $key => $item) {
@@ -98,7 +97,19 @@ trait Twitter_Feed
         $items = array_splice($items, 0, $settings['eael_twitter_feed_post_limit']);
 
         foreach ($items as $item) {
+            $is_reply = !empty($item['in_reply_to_status_id']) ? true : false;
+            $show_reply = ( !empty($settings['eael_twitter_feed_show_replies']) && 'true' === $settings['eael_twitter_feed_show_replies'] ) ? true : false;
+
+            if($is_reply && !$show_reply){
+                continue;
+            }
+
             $delimeter = strlen($item['full_text']) > $settings['eael_twitter_feed_content_length'] ? '...' : '';
+
+	        $media = isset( $item['extended_entities']['media'] ) ? $item['extended_entities']['media'] :
+		        ( isset( $item['retweeted_status']['entities']['media'] ) ? $item['retweeted_status']['entities']['media'] :
+			        ( isset( $item['quoted_status']['entities']['media'] ) ? $item['quoted_status']['entities']['media'] :
+				        [] ) );
 
             $html .= '<div class="eael-twitter-feed-item ' . $class . '">
 				<div class="eael-twitter-feed-item-inner">
@@ -108,14 +119,14 @@ trait Twitter_Feed
                                 <img src="' . $item['user']['profile_image_url_https'] . '">
                             </a>';
                         }
-                        
+
                         $html .= '<a class="eael-twitter-feed-item-meta" href="//twitter.com/' . $settings['eael_twitter_feed_ac_name'] . '" target="_blank">';
                             if ($settings['eael_twitter_feed_show_icon'] == 'true') {
                                 $html .= '<i class="fab fa-twitter eael-twitter-feed-item-icon"></i>';
                             }
                             $html .= '<span class="eael-twitter-feed-item-author">' . $item['user']['name'] . '</span>
                         </a>';
-            
+
                         if ($settings['eael_twitter_feed_show_date'] == 'true') {
                             $html .= '<span class="eael-twitter-feed-item-date">' . sprintf(__('%s ago', 'essential-addons-for-elementor-lite'), human_time_diff(strtotime($item['created_at']))) . '</span>';
                         }
@@ -125,10 +136,11 @@ trait Twitter_Feed
                             $link_free_text = isset($item['entities']['urls'][0]['url'])?str_replace($item['entities']['urls'][0]['url'], '', $item['full_text']):$item['full_text'];
                             $html .= '<p>' . substr( $link_free_text, 0, $settings['eael_twitter_feed_content_length']) . $delimeter . '</p>';
                         if ($settings['eael_twitter_feed_show_read_more'] == 'true') {
-                            $html .= '<a href="//twitter.com/' . $item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">Read More <i class="fas fa-angle-double-right"></i></a>';
+	                        $read_more = !empty( $settings[ 'eael_twitter_feed_show_read_more_text' ] ) ? $settings[ 'eael_twitter_feed_show_read_more_text' ] : __( 'Read More', 'essential-addons-for-elementor-lite' );
+                            $html .= '<a href="//twitter.com/' . $item['user']['screen_name'] . '/status/' . $item['id_str'] . '" target="_blank" class="read-more-link">'.$read_more.' <i class="fas fa-angle-double-right"></i></a>';
                         }
                     $html .= '</div>
-                    ' . (isset($item['extended_entities']['media'][0]) && $settings['eael_twitter_feed_media'] == 'true' ? ($item['extended_entities']['media'][0]['type'] == 'photo' ? '<img src="' . $item['extended_entities']['media'][0]['media_url_https'] . '">' : '') : '') . '
+                    ' . ( isset( $media[0] ) && $settings['eael_twitter_feed_media'] == 'true' ? ( $media[0]['type'] == 'photo' ? '<img src="' . $media[0]['media_url_https'] . '">' : '' ) : '' ) . '
                 </div>
 			</div>';
         }

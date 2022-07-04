@@ -6,6 +6,7 @@ namespace Nextend\SmartSlider3\Application\Admin\FormManager\Slider;
 
 use Nextend\Framework\Form\Container\ContainerTable;
 use Nextend\Framework\Form\Element\Grouping;
+use Nextend\Framework\Form\Element\Message\Notice;
 use Nextend\Framework\Form\Element\Message\Warning;
 use Nextend\Framework\Form\Element\OnOff;
 use Nextend\Framework\Form\Element\Select;
@@ -49,7 +50,7 @@ class SliderOptimize extends AbstractSliderTab {
 
         $row1 = $table->createRow('loading-1');
 
-        new Select($row1, 'loading-type', 'Loading type', '', array(
+        new Select($row1, 'loading-type', n2_('Loading type'), '', array(
             'options'            => array(
                 ''            => n2_('Instant'),
                 'afterOnLoad' => n2_('After page loaded'),

@@ -74,7 +74,7 @@ class Twitter_Feed extends Widget_Base
         ];
     }
 
-    protected function _register_controls()
+    protected function register_controls()
     {
         $this->start_controls_section(
             'eael_section_twitter_feed_acc_settings',
@@ -129,13 +129,42 @@ class Twitter_Feed extends Widget_Base
         );
 
 	    $this->add_control(
-		    'eael_twitter_feed_data_cache_limit',
+		    'eael_auto_clear_cache',
 		    [
-			    'label' => __('Data Cache Time', 'essential-addons-for-elementor-lite'),
-			    'type' => Controls_Manager::NUMBER,
-			    'min' => 1,
-			    'default' => 60,
-			    'description' => __('Cache expiration time (Minutes)', 'essential-addons-for-elementor-lite')
+			    'label'        => esc_html__( 'Auto Cache Clear', 'essential-addons-for-elementor-lite' ),
+			    'type'         => Controls_Manager::SWITCHER,
+			    'label_on'     => __( 'Yes', 'essential-addons-for-elementor-lite' ),
+			    'label_off'    => __( 'No', 'essential-addons-for-elementor-lite' ),
+			    'default'      => 'yes',
+			    'return_value' => 'yes',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_twitter_feed_cache_limit',
+		    [
+			    'label'       => __( 'Data Cache Time', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::NUMBER,
+			    'min'         => 1,
+			    'default'     => 60,
+			    'description' => __( 'Cache expiration time (Minutes)', 'essential-addons-for-elementor-lite' ),
+			    'condition'   => [
+				    'eael_auto_clear_cache' => 'yes'
+			    ]
+		    ]
+	    );
+
+	    $this->add_control(
+		    'eael_clear_cache_control',
+		    [
+			    'label'       => __( 'Clear Cache', 'essential-addons-for-elementor-lite' ),
+			    'type'        => Controls_Manager::BUTTON,
+			    'text'        => __( 'Clear', 'essential-addons-for-elementor-lite' ),
+			    'event'       => 'ea:cache:clear',
+			    'description' => esc_html__( 'Note: This will refresh your feed and fetch the latest data from your Twitter account', 'essential-addons-for-elementor-lite' ),
+			    'condition'   => [
+				    'eael_auto_clear_cache' => ''
+			    ]
 		    ]
 	    );
 
@@ -218,9 +247,9 @@ class Twitter_Feed extends Widget_Base
         );
 
         $this->add_control(
-            'eael_twitter_feed_media',
+            'eael_twitter_feed_show_replies',
             [
-                'label' => esc_html__('Show Media Elements', 'essential-addons-for-elementor-lite'),
+                'label' => esc_html__('Show Replies', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('yes', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('no', 'essential-addons-for-elementor-lite'),
@@ -275,9 +304,34 @@ class Twitter_Feed extends Widget_Base
         );
 
         $this->add_control(
+            'eael_twitter_feed_show_read_more_text',
+            [
+                'label' => esc_html__('Read More Text', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::TEXT,
+                'label_block' => false,
+                'default' => __('Read More', 'essential-addons-for-elementor-lite'),
+	            'condition' => [
+	            	'eael_twitter_feed_show_read_more' => 'true',
+	            ]
+            ]
+        );
+
+        $this->add_control(
             'eael_twitter_feed_show_icon',
             [
                 'label' => esc_html__('Show Icon', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('yes', 'essential-addons-for-elementor-lite'),
+                'label_off' => __('no', 'essential-addons-for-elementor-lite'),
+                'default' => 'true',
+                'return_value' => 'true',
+            ]
+        );
+
+        $this->add_control(
+            'eael_twitter_feed_media',
+            [
+                'label' => esc_html__('Show Media', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('yes', 'essential-addons-for-elementor-lite'),
                 'label_off' => __('no', 'essential-addons-for-elementor-lite'),
@@ -308,7 +362,7 @@ class Twitter_Feed extends Widget_Base
                         ],
                     ],
                     'default' => '1',
-                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
+                    'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.com/upgrade/ea-pro" target="_blank">Pro version</a> for more stunning elements and customization options.</span>',
                 ]
             );
 
@@ -350,15 +404,15 @@ class Twitter_Feed extends Widget_Base
                 'options' => [
                     'flex-start' => [
                         'title' => __('Top', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => __('Middle', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'flex-end' => [
                         'title' => __('Bottom', 'essential-addons-for-elementor-lite'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'default' => 'center',

@@ -101,6 +101,9 @@ class Astra_Site_Options_Import {
 			'woocommerce_enable_myaccount_registration',
 			'woocommerce_registration_generate_username',
 
+			// Plugin: Easy Digital Downloads - EDD.
+			'edd_settings',
+
 			// Plugin: WPForms.
 			'wpforms_settings',
 
@@ -111,6 +114,9 @@ class Astra_Site_Options_Import {
 			'learndash_settings_theme_ld30',
 			'learndash_settings_courses_themes',
 
+			// Astra Theme Global Color Palette and Typography Preset options.
+			'astra-color-palettes',
+			'astra-typography-presets',
 		);
 	}
 
